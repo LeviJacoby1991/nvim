@@ -16,11 +16,24 @@ local lazygit = terminal:new({cmd = "lazygit",
   float_opts = { border = "double" }, 
   hidden = true,
 })
+local shortCutTerm = terminal:new({
+  direction = "horizontal",
+  hidden = true,
+  size = 20,
+  hide_numbers = true,
+  close_on_exit = true,
+})
 
 function _lazygit_toggle()
   lazygit:toggle()
 end
 
+function _shortCutTerm_toggle()
+  shortCutTerm:toggle()
+end
+
+toggle_term.setup{}
+
 vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 vim.api.nvim_set_keymap("n", "<leader>lg", "<cmd>lua _lazygit_toggle()<CR>", { noremap = true, silent = true})
-toggle_term.setup{}
+vim.api.nvim_set_keymap("n", "<leader><S-T>", "<cmd>lua _shortCutTerm_toggle()<CR>", { noremap = true, silent = true})
