@@ -1,4 +1,4 @@
-local servers = { 'gopls', 'clangd', 'rust_analyzer' }
+local servers = { 'gopls', 'clangd', 'rust_analyzer', 'lua_ls' }
 
 local handlers = {
   ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
@@ -17,7 +17,7 @@ mason_lsp_config.setup({
 local on_attach = function (client, bufnr)
   local map = function(mode, lhs, rhs)
     local options = { noremap = true, silent = true, buffer = bufnr }
-    if opts then 
+    if opts then
       options = vim.tbl_extend("force", options, opts)
     end
     vim.keymap.set(mode, lhs, rhs, options)
@@ -34,7 +34,7 @@ local on_attach = function (client, bufnr)
 end
 
 
-for _, name in ipairs(servers) do 
+for _, name in ipairs(servers) do
   lsp[name].setup {
     on_attach = on_attach,
     handlers = handlers,

@@ -36,6 +36,6 @@ telescope.setup {
 }
 
 map('n', '<leader>ft')
-map('n', '<leader>ff',  'find_files')
+map('n', '<leader>ff', 'find_files')
 map('n', '<leader>fb', 'buffers')
 map('n', '<leader>fd', 'diagnostics')

@@ -47,12 +47,11 @@ return packer.startup(function(use)
   use { "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons", opt = true } }
   use "nvim-treesitter/nvim-treesitter"
   use { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim", "neovim/nvim-lspconfig" }
+  use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
   use { "ray-x/go.nvim" }
   use { "ray-x/guihua.lua" }
-  use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
+  use { "folke/neodev.nvim" }
   use { "theHamsta/nvim-dap-virtual-text" }
-  use { "leoluz/nvim-dap-go" }
   use { "akinsho/toggleterm.nvim" }
-  use {"stevearc/vim-arduino"}
   --use "windwp/nvim-autopairs"
 end)
