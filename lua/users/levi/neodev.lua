@@ -1,4 +1,4 @@
-require("neodev").setup({
+require'neodev'.setup({
     library = {
     enabled = true,
     runtime = true,
