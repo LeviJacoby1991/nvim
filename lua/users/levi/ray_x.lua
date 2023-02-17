@@ -4,7 +4,9 @@ if not status_ok then
   return
 end
 
-go.setup()
+go.setup({
+  gofmt = 'gofmt',
+})
 
 local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
 vim.api.nvim_create_autocmd("BufWritePre", {

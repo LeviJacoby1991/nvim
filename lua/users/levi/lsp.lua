@@ -1,4 +1,4 @@
-local servers = { 'gopls', 'clangd', 'rust_analyzer', 'lua_ls' }
+local servers = { 'gopls', 'clangd', 'rust_analyzer', 'lua_ls', 'graphql' }
 
 local handlers = {
   ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
@@ -15,7 +15,7 @@ mason_lsp_config.setup({
 })
 
 local on_attach = function (client, bufnr)
-  local map = function(mode, lhs, rhs)
+  local map = function(mode, lhs, rhs, opts)
     local options = { noremap = true, silent = true, buffer = bufnr }
     if opts then
       options = vim.tbl_extend("force", options, opts)

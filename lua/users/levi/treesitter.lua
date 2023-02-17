@@ -5,7 +5,7 @@ if not status_ok then
 end
 
 treeconfig.setup{
-  ensure_installed = {"c", "lua", "go", "rust", "cpp", "vim", "help"},
+  ensure_installed = {"c", "lua", "go", "rust", "cpp", "vim", "help", "graphql"},
   highlight = {
     enable = true
   }
