@@ -40,9 +40,9 @@ return packer.startup(function(use)
   use "saadparwaiz1/cmp_luasnip"
   use "L3MON4D3/LuaSnip"
   use "vimwiki/vimwiki"
-  use "ellisonleao/gruvbox.nvim" 
+  use "ellisonleao/gruvbox.nvim"
   use "rafamadriz/friendly-snippets"
-  use "jiangmiao/auto-pairs"
+  --use "jiangmiao/auto-pairs"
   use { "nvim-telescope/telescope.nvim", tag = "0.1.0", requires = { "nvim-lua/plenary.nvim" } }
   use { "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons", opt = true } }
   use "nvim-treesitter/nvim-treesitter"
@@ -53,5 +53,5 @@ return packer.startup(function(use)
   use { "folke/neodev.nvim" }
   use { "theHamsta/nvim-dap-virtual-text" }
   use { "akinsho/toggleterm.nvim" }
-  --use "windwp/nvim-autopairs"
+  use { "windwp/nvim-autopairs", config = function() require("nvim-autopairs").setup {} end }
 end)

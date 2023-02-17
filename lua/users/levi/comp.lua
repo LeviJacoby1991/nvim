@@ -1,20 +1,33 @@
-local status_ok, cmp = pcall(require, 'cmp')
-if not status_ok then
+local autopairs_status_ok, autopairs = pcall(require, 'nvim-autopairs')
+
+if not autopairs_status_ok then
   return
 end
 
-local status_ok, luasnip = pcall(require, 'luasnip')
+local cmp_autopairs_status_ok, cmp_autopairs = pcall(require, 'nvim-autopairs.completion.cmp')
 
-if not status_ok then
+if not cmp_autopairs_status_ok then
   return
 end
+
+local cmp_status_ok, cmp = pcall(require, 'cmp')
+
+if not cmp_status_ok then
+  return
+end
+
+local lua_status_ok, luasnip = pcall(require, 'luasnip')
+
+if not lua_status_ok then
+  return
+end
+
+require("luasnip/loaders/from_vscode").lazy_load()
 
 local check_backspace = function()
   local col = vim.fn.col "." - 1
   return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
 end
-          
-require("luasnip/loaders/from_vscode").lazy_load()
 
 local has_words_before = function()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -32,7 +45,7 @@ cmp.setup {
   mapping = {
     ['<C-b>'] = cmp.mapping.scroll_docs(-1),
     ['<C-f>'] = cmp.mapping.scroll_docs(1),
-    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-Space>'] = cmp.mapping.complete({ config = { sources = { name = 'nvim_lsp' }, { name = 'luasnip' }, {name = 'buffer'}, { name = 'path' } } }),
     ['<C-e>'] = cmp.mapping.abort(),
     ['<CR>'] = cmp.mapping.confirm( { select = false } ),
     ['<Tab>'] = cmp.mapping(function(fallback)
@@ -42,7 +55,7 @@ cmp.setup {
         luasnip.expand_or_jump()
       elseif has_words_before() then
         cmp.complete()
-      else 
+      else
         fallback()
       end
     end, { "i", "s" }) ,
@@ -51,7 +64,7 @@ cmp.setup {
         cmp.select_prev_item()
       elseif luasnip.jumpable(-1) then
         luasnip.jump(-1)
-      else 
+      else
         fallback()
       end
     end, {"i", "s"}),
@@ -73,3 +86,9 @@ cmp.setup {
     documentation = cmp.config.window.bordered(),
   },
 }
+
+cmp.event:on(
+  'confirm',
+   cmp_autopairs.on_confirm_done()
+)
+

@@ -1,4 +1,4 @@
-set = vim.opt
+local set = vim.opt
 set.number = true
 set.expandtab = true
 set.smarttab = true
@@ -16,4 +16,4 @@ vim.api.nvim_create_autocmd({"BufEnter", "FocusGained", "InsertLeave"}, {command
 vim.api.nvim_create_autocmd({"BufLeave", "FocusLost", "InsertEnter"}, {command = "set norelativenumber", group = nt})
 
 local termNums = vim.api.nvim_create_augroup("toggleTerm", {clear = true})
-vim.api.nvim_create_autocmd({"TermEnter", "FocusLost", "InsertEnter"}, {command = "set norelativenumber", group = nt})
+vim.api.nvim_create_autocmd({"TermEnter", "FocusLost", "InsertEnter"}, {command = "set norelativenumber", group = termNums})

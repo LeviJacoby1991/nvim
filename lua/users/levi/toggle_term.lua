@@ -1,4 +1,10 @@
-toggle_term = require("toggleterm")
+local status_ok, toggle_term = pcall(require, 'toggleterm')
+
+if not status_ok then
+  return
+end
+
+toggle_term.setup{}
 
 function _G.set_terminal_keymaps()
   local opts = {buffer = 0}
@@ -10,13 +16,15 @@ function _G.set_terminal_keymaps()
   vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
 end
 
-local terminal = require('toggleterm.terminal').Terminal
-local lazygit = terminal:new({cmd = "lazygit", 
-  direction = "float", 
-  float_opts = { border = "double" }, 
+local toggleterm = require'toggleterm.terminal'.Terminal
+
+local lazygit = toggleterm:new({cmd = "lazygit",
+  direction = "float",
+  float_opts = { border = "double" },
   hidden = true,
 })
-local shortCutTerm = terminal:new({
+
+local shortCutTerm = toggleterm:new({
   direction = "horizontal",
   hidden = true,
   size = 20,
@@ -24,16 +32,14 @@ local shortCutTerm = terminal:new({
   close_on_exit = true,
 })
 
-function _lazygit_toggle()
+function Lazygit_toggle()
   lazygit:toggle()
 end
 
-function _shortCutTerm_toggle()
+function ShortCutTerm_toggle()
   shortCutTerm:toggle()
 end
 
-toggle_term.setup{}
-
 vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
-vim.api.nvim_set_keymap("n", "<leader>lg", "<cmd>lua _lazygit_toggle()<CR>", { noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "<leader><S-T>", "<cmd>lua _shortCutTerm_toggle()<CR>", { noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "<leader>lg", "<cmd>lua Lazygit_toggle()<CR>", { noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "<leader><S-T>", "<cmd>lua ShortCutTerm_toggle()<CR>", { noremap = true, silent = true})
