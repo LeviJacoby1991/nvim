@@ -42,7 +42,6 @@ return packer.startup(function(use)
   use "vimwiki/vimwiki"
   use "ellisonleao/gruvbox.nvim"
   use "rafamadriz/friendly-snippets"
-  --use "jiangmiao/auto-pairs"
   use { "nvim-telescope/telescope.nvim", tag = "0.1.0", requires = { "nvim-lua/plenary.nvim" } }
   use { "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons", opt = true } }
   use "nvim-treesitter/nvim-treesitter"

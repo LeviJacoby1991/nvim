@@ -4,6 +4,7 @@ if not autopairs_status_ok then
   return
 end
 
+
 local cmp_autopairs_status_ok, cmp_autopairs = pcall(require, 'nvim-autopairs.completion.cmp')
 
 if not cmp_autopairs_status_ok then
@@ -45,7 +46,7 @@ cmp.setup {
   mapping = {
     ['<C-b>'] = cmp.mapping.scroll_docs(-1),
     ['<C-f>'] = cmp.mapping.scroll_docs(1),
-    ['<C-Space>'] = cmp.mapping.complete({ config = { sources = { name = 'nvim_lsp' }, { name = 'luasnip' }, {name = 'buffer'}, { name = 'path' } } }),
+    ['<C-Space>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.abort(),
     ['<CR>'] = cmp.mapping.confirm( { select = false } ),
     ['<Tab>'] = cmp.mapping(function(fallback)
@@ -87,8 +88,8 @@ cmp.setup {
   },
 }
 
-cmp.event:on(
-  'confirm',
-   cmp_autopairs.on_confirm_done()
-)
+--cmp.event:on(
+--  'confirm',
+--   cmp_autopairs.on_confirm_done()
+--)
 
