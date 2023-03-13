@@ -53,4 +53,5 @@ return packer.startup(function(use)
   use { "theHamsta/nvim-dap-virtual-text" }
   use { "akinsho/toggleterm.nvim" }
   use { "windwp/nvim-autopairs", config = function() require("nvim-autopairs").setup {} end }
+  use { "lukas-reineke/indent-blankline.nvim" }
 end)

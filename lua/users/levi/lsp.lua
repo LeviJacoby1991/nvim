@@ -4,17 +4,17 @@ local handlers = {
   ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
 }
 
-local capabilities = require'cmp_nvim_lsp'.default_capabilities(vim.lsp.protocol.make_client_capabilities())
-local mason = require'mason'
-local mason_lsp_config = require'mason-lspconfig'
-local lsp = require'lspconfig'
+local capabilities = require 'cmp_nvim_lsp'.default_capabilities(vim.lsp.protocol.make_client_capabilities())
+local mason = require 'mason'
+local mason_lsp_config = require 'mason-lspconfig'
+local lsp = require 'lspconfig'
 
 mason.setup()
 mason_lsp_config.setup({
   automatic_installation = true,
 })
 
-local on_attach = function (client, bufnr)
+local on_attach = function(client, bufnr)
   local map = function(mode, lhs, rhs, opts)
     local options = { noremap = true, silent = true, buffer = bufnr }
     if opts then
@@ -30,7 +30,9 @@ local on_attach = function (client, bufnr)
   map('n', 'gr', vim.lsp.buf.references)
   map('n', ',rn', vim.lsp.buf.rename)
   map('n', ',ac', vim.lsp.buf.code_action)
-  map('n', ',f', vim.lsp.buf.formatting)
+  map('n', ',f', function()
+    vim.lsp.buf.format { async = true }
+  end)
 end
 
 
