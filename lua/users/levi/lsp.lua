@@ -1,13 +1,26 @@
 local servers = { 'gopls', 'clangd', 'rust_analyzer', 'lua_ls', 'graphql' }
+--local servers = { 'gopls', 'clangd', 'rust_analyzer', 'lua_ls' }
 
 local handlers = {
   ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
 }
 
 local capabilities = require 'cmp_nvim_lsp'.default_capabilities(vim.lsp.protocol.make_client_capabilities())
-local mason = require 'mason'
-local mason_lsp_config = require 'mason-lspconfig'
-local lsp = require 'lspconfig'
+
+local mason_ok, mason = pcall(require, 'mason')
+if not mason_ok then
+  return
+end
+
+local mason_lsp_ok, mason_lsp_config = pcall(require, 'mason-lspconfig')
+if not mason_lsp_ok then
+  return
+end
+
+local lsp_ok, lsp = pcall(require, 'lspconfig')
+if not lsp_ok then
+  return
+end
 
 mason.setup()
 mason_lsp_config.setup({
