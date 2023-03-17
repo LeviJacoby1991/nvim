@@ -1,5 +1,17 @@
-local dap, dapui = require'dap', require("dapui")
-local dap_vt = require'nvim-dap-virtual-text'
+local dap_ok, dap  = pcall(require, 'dap')
+if not dap_ok then
+  return
+end
+
+local dapui_ok, dapui  = pcall(require, 'dapui')
+if not dapui_ok then
+  return
+end
+
+local dap_vt_ok, dap_vt = pcall(require, 'nvim-dap-virtual-text')
+if not dap_vt_ok then
+  return
+end
 
 dap_vt.setup {
   enabled = true,
