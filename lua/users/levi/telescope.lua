@@ -13,8 +13,8 @@ local function map(mode, lhs, rhs, opt)
     table.insert(t, 2, rhs)
   end
   local options = { noremap = true, silent = true }
-  if opts then
-    options = vim.tbl_extend("force", options, opts)
+  if opt then
+    options = vim.tbl_extend("force", options, opt)
   end
   vim.keymap.set(mode, lhs, table.concat(t), options)
 end
@@ -39,3 +39,4 @@ map('n', '<leader>ft')
 map('n', '<leader>ff', 'find_files')
 map('n', '<leader>fb', 'buffers')
 map('n', '<leader>fd', 'diagnostics')
+map('n', '<leader>fs', 'treesitter')

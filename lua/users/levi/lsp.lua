@@ -1,4 +1,4 @@
-local servers = { 'gopls', 'clangd', 'rust_analyzer', 'lua_ls', 'graphql' }
+local servers = { 'gopls', 'clangd', 'rust_analyzer', 'solargraph', 'lua_ls', 'graphql' }
 --local servers = { 'gopls', 'clangd', 'rust_analyzer', 'lua_ls' }
 
 local handlers = {

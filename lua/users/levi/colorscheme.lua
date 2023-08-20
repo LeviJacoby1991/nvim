@@ -6,7 +6,11 @@ end
 
 -- fdasdf
 gruvbox.setup({
-  italic = false,
+  italic = {
+    strings = false,
+    operators = false,
+    comments = false,
+  }
 })
 
 vim.cmd([[colorscheme gruvbox]])
