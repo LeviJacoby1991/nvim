@@ -54,4 +54,5 @@ return packer.startup(function(use)
   use { "akinsho/toggleterm.nvim" }
   use { "windwp/nvim-autopairs", config = function() require("nvim-autopairs").setup {disable_filetype = {'ruby', 'vim', 'TelescopePrompt'}} end }
   use { "lukas-reineke/indent-blankline.nvim" }
+  use { "skanehira/preview-uml.vim" }
 end)
