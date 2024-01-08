@@ -8,9 +8,8 @@ end
 gruvbox.setup({
   italic = {
     strings = false,
-    operators = false,
-    comments = false,
-  }
+    comments = true,
+  },
 })
 
 vim.cmd([[colorscheme gruvbox]])

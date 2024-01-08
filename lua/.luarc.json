@@ -1,7 +1,7 @@
 {
     "workspace.library": [
-        "/home/levi/.local/share/nvim/site/pack/packer/start/neodev.nvim/types/stable",
-        "/usr/share/nvim/runtime/lua",
+        "/home/levi/.local/share/nvim/site/pack/packer/start/neodev.nvim/types/nightly",
+        "/usr/local/share/nvim/runtime/lua",
         "/home/levi/.local/share/nvim/site/pack/packer/opt/nvim-web-devicons/lua",
         "/home/levi/.local/share/nvim/site/pack/packer/start/LuaSnip/lua",
         "/home/levi/.local/share/nvim/site/pack/packer/start/cmp-buffer/lua",
@@ -31,4 +31,3 @@
         "/home/levi/.config/nvim/lua",
         "${3rd}/luv/library"
     ]
-}

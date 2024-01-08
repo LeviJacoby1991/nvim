@@ -5,8 +5,12 @@ if not status_ok then
 end
 
 treeconfig.setup{
-  ensure_installed = {"c", "go", "rust", "cpp", "lua", "vim", "help", "graphql", "ruby"},
+  ensure_installed = {"c", "lua", "go", "rust", "cpp", "vim", "vimdoc", "graphql"},
+  auto_install = true,
+  sync_install=false,
+  ignore_install={"javascript"},
   highlight = {
     enable = true
-  }
+  },
+  modules = {}
 }
