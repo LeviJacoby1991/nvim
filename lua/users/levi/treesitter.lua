@@ -10,7 +10,8 @@ treeconfig.setup{
   sync_install=false,
   ignore_install={"javascript"},
   highlight = {
-    enable = true
+    enable = true,
+    disable = {"vimdoc"}
   },
   modules = {}
 }

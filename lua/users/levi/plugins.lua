@@ -38,7 +38,11 @@ return packer.startup(function(use)
   use "hrsh7th/cmp-path"
   use "hrsh7th/cmp-cmdline"
   use "saadparwaiz1/cmp_luasnip"
-  use "L3MON4D3/LuaSnip"
+  use ({
+    "L3MON4D3/LuaSnip",
+    tag = "v2.*",
+    run = "make install_jsregexp"
+  })
   use "vimwiki/vimwiki"
   use "ellisonleao/gruvbox.nvim"
   use "rafamadriz/friendly-snippets"
@@ -55,4 +59,5 @@ return packer.startup(function(use)
   use { "windwp/nvim-autopairs", config = function() require("nvim-autopairs").setup {disable_filetype = {'ruby', 'vim', 'TelescopePrompt'}} end }
   use { "lukas-reineke/indent-blankline.nvim" }
   use { "skanehira/preview-uml.vim" }
+  use { "ellisonleao/dotenv.nvim" }
 end)
