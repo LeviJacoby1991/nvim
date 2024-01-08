@@ -1,4 +1,4 @@
-local servers = { 'gopls', 'clangd', 'rust_analyzer', 'solargraph', 'lua_ls', 'graphql' }
+local servers = { 'gopls', 'clangd', 'rust_analyzer', 'solargraph', 'lua_ls', 'graphql', 'tsserver' }
 --local servers = { 'gopls', 'clangd', 'rust_analyzer', 'lua_ls' }
 
 local handlers = {
@@ -25,6 +25,7 @@ end
 mason.setup()
 mason_lsp_config.setup({
   automatic_installation = true,
+  ensure_installed = servers
 })
 
 local on_attach = function(client, bufnr)
