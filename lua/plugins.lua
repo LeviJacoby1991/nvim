@@ -26,7 +26,7 @@ return lazy.setup({
   'hrsh7th/cmp-path',
   'hrsh7th/cmp-cmdline',
   'saadparwaiz1/cmp_luasnip',
-  { 'L3MON4D3/LuaSnip', tag = 'v2.2.0', run = 'make install_jsregexp' },
+  { 'L3MON4D3/LuaSnip', version = 'v2.*.*', run = 'make install_jsregexp' },
   'vimwiki/vimwiki',
   'ellisonleao/gruvbox.nvim',
   'rafamadriz/friendly-snippets',
