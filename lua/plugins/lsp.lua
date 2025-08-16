@@ -34,7 +34,7 @@ return {
     mason_lsp_config.setup({
       automatic_installation = true,
       ensure_installed = servers,
-      automatic_enable = false,
+      automatic_enable = {exclude = servers},
     })
 
     local on_attach = function(client, bufnr)
