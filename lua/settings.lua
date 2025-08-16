@@ -9,7 +9,8 @@ set.showmatch = true
 set.splitright = true
 set.swapfile = false
 set.termguicolors = true
-
+--set.border = 'rounded'
+vim.o.winborder = 'rounded'
 
 local nt = vim.api.nvim_create_augroup("numbertoggle", {clear = true})
 vim.api.nvim_create_autocmd({"BufEnter", "FocusGained", "InsertLeave"}, {command = "set relativenumber", group = nt})
