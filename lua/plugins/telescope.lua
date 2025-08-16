@@ -8,7 +8,7 @@ end
 
 return {
   'nvim-telescope/telescope.nvim',
-  tag = '0.1.5',
+  tag = '0.1.8',
   dependencies = { 'nvim-lua/plenary.nvim' },
   defaults = {
     mappings = {
@@ -24,7 +24,7 @@ return {
   pickers = {
   },
   config = function()
-    --local actions = require'telescope.actions'
+    local actions = require'telescope.actions'
     local builtin = require'telescope.builtin'
     vim.keymap.set('n', '<leader>ft', ':Telescope <cr>')
     map('n', '<leader>ff', builtin.find_files)

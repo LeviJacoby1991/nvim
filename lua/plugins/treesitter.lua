@@ -1,22 +1,14 @@
 return {
   'nvim-treesitter/nvim-treesitter',
-  branch = 'main',
-  auto_install = false,
-  sync_install = false,
-  ignore_install={},
-  --highlight = {
-  --  enable = true,
-  --  --disable = {'vimdoc'}
-  --},
-  modules = {},
-  config = function()
-    local configs = require 'nvim-treesitter.configs'
-    configs.setup {
+  branch = 'master',
+  build = ":TSUpdate",
+  config = function ()
+    require('nvim-treesitter.configs').setup({
+      highlight = {enable = true, disable = {'vimdoc'}},
       ensure_installed = {'c', 'lua', 'go', 'rust', 'cpp', 'vim', 'vimdoc', 'graphql'},
-      highlight = {
-        enable = true
-      },
-    }
+      auto_install = false,
+      sync_install = false,
+    })
   end
 }
 
