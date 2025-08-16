@@ -1,7 +1,7 @@
 return {
   'neovim/nvim-lspconfig',
   config = function()
-    local servers = { 'gopls', 'clangd', 'rust_analyzer', 'solargraph', 'lua_ls', 'graphql', 'tsserver', 'bufls', 'pyright'}
+    local servers = { 'gopls', 'clangd', 'rust_analyzer', 'solargraph', 'lua_ls', 'graphql', 'ts_ls', 'buf_ls', 'pyright'}
     local handlers = { ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded' }) }
 
     local capabilities = vim.tbl_deep_extend(
