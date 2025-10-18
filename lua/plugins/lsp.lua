@@ -1,10 +1,7 @@
 return {
   'neovim/nvim-lspconfig',
   config = function()
-    local servers = { 'gopls', 'clangd', 'rust_analyzer', 'solargraph', 'lua_ls', 'graphql', 'ts_ls', 'buf_ls', 'pyright'}
-    --local handlers = { ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded' }) }
-    --local handlers = { ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }) }
-    --vim.lsp.hover('rounded')
+    local servers = { 'gopls', 'clangd', 'rust_analyzer', 'lua_ls', 'graphql', 'ts_ls', 'buf_ls', 'pyright'}
 
     local capabilities = vim.tbl_deep_extend(
       'force',
@@ -24,47 +21,44 @@ return {
       return
     end
 
-    local lsp_status_ok, lsp = pcall(require, 'lspconfig')
-    if not lsp_status_ok then
-      print('lspconfig failed')
-      return
-    end
-
     mason.setup()
     mason_lsp_config.setup({
       automatic_installation = true,
       ensure_installed = servers,
-      automatic_enable = {exclude = servers},
+      automatic_enable = {exclude = 'gopls'},
     })
 
-    local on_attach = function(client, bufnr)
-      local map = function(mode, lhs, rhs, opts)
-        local options = {noremap = true, silent = true, buffer = bufnr}
-        if opts then
-          options = vim.tbl_extend('force', options, opts)
+    vim.api.nvim_create_autocmd('LspAttach', {
+      callback = function(ev)
+        local client = vim.lsp.get_client_by_id(ev.data.client_id)
+        if client:supports_method('textDocument/formatting') then
+          vim.keymap.set('n', ',F', vim.lsp.buf.format, { desc = 'Format Buffer' })
         end
-        vim.keymap.set(mode, lhs, rhs, options)
-      end
-      map('n', 'K', vim.lsp.buf.hover)
-      map('n', ']d', vim.diagnostic.goto_next)
-      map('n', '[d', vim.diagnostic.goto_prev)
-      map('n', 'gd', vim.lsp.buf.definition)
-      map('n', 'gD', vim.lsp.buf.declaration)
-      map('n', 'gr', vim.lsp.buf.references)
-      map('n', ',rn', vim.lsp.buf.rename)
-      map('n', ',ac', vim.lsp.buf.code_action)
-      map('n', ',f', function()
-        vim.lsp.buf.format { async = true }
-      end)
-    end
 
-    for _, name in ipairs(servers) do
-      lsp[name].setup {
-        on_attach = on_attach,
-        --handlers = handlers,
-        capabilities = capabilities,
-      }
-    end
+        if client:supports_method('textDocument/definition') then
+          vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = 'Go to Definition' })
+        end
+
+        if client:supports_method('textDocument/declaration') then
+          vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { desc = 'Go to Declaration' })
+        end
+      end
+    })
+
+    vim.lsp.config('ruby-lsp', {
+      cmd = { 'ruby-lsp' },
+      default_config = {
+        cmd = {'ruby-lsp'},
+        filetypes = {'ruby'},
+        root_markers = { {'Gemfile'}, '.git'},
+        init_options = {
+          formatter = 'standard',
+          linters = { 'standard' }
+        }
+      },
+      filetypes = { 'ruby' },
+    })
+    vim.lsp.enable('ruby-lsp')
 
     -- GODOT
     -- paths to check for project.godot file
@@ -74,7 +68,7 @@ return {
     local cwd = vim.fn.getcwd()
 
     -- iterate over paths and check
-    for key, value in pairs(paths_to_check) do
+    for _, value in pairs(paths_to_check) do
       if vim.uv.fs_stat(cwd .. value .. 'project.godot') then
           is_godot_project = true
           godot_project_path = cwd .. value
@@ -90,7 +84,7 @@ return {
     end
 
     if not is_godot_server_running then
-      lsp.gdscript.setup{}
+      vim.lsp.config('gdscript', {})
     end
     -- END GODOT
 
