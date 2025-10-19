@@ -15,3 +15,10 @@ map('n', '<C-L>', '<C-W><C-L>')
 map('n', '<C-H>', '<C-W><C-H>')
 map('n', '<leader>nvcc', ':source %<cr>')
 map('n', '<leader><S-Q>', ':q!<cr>')
+
+vim.api.nvim_create_autocmd('Filetype', {
+  pattern = {'qf'},
+  callback = function ()
+    vim.keymap.set('n', 'q', '<cmd>cclose<cr>', {silent = true, buffer = true})
+  end
+})
