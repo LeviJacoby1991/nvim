@@ -32,6 +32,7 @@ return {
     map('n', '<leader>fd', builtin.diagnostics)
     map('n', '<leader>fr', builtin.lsp_references)
     map('n', '<leader>fs', builtin.treesitter)
+    map('n', '<leader>fc', builtin.current_buffer_fuzzy_find)
     map('n', '<leader>wk', builtin.keymaps)
   end,
 }
